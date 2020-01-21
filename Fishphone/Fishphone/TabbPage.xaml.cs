@@ -19,6 +19,7 @@ namespace Fishphone
         {
             InitializeComponent();
             GeoLoc();
+            Subscribe();
         }
         public async void GeoLoc()
         {

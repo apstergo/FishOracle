@@ -288,7 +288,7 @@ namespace Fishphone
 
                     var values1 = new Dictionary<string, string>
                     {
-                       { "id", CrossSettings.Current.GetValueOrDefault("DefaultCity", 0).ToString() }
+                       { "id", (CrossSettings.Current.GetValueOrDefault("DefaultCity", 0)+1).ToString() }
                     };
 
 
@@ -414,7 +414,7 @@ namespace Fishphone
                 }
                 catch
                 {
-
+                    MessagingCenter.Send<Parser>(this, "DefultCity");
                 }
             }
         }
