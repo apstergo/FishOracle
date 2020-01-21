@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fishphone.Feedback" Title="Написать нам">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Image Source="seabottom.png" Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+        <Label Text="Напишите нам что-нибудь" FontSize="24" Grid.Row="1" TextColor="#626067" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+        <Entry Placeholder="Ваше имя" PlaceholderColor="#89888d" Grid.Row="2" Margin="16,0,16,0" x:Name="NameUser"/>
+        <Entry Placeholder="Ваша почта" PlaceholderColor="#89888d" Grid.Row="3" Margin="16,0,16,0" x:Name="Email"/>
+        <Label Text="Не обязательно" FontSize="10" Grid.Row="4" Margin="20,0,20,0"/>
+        <Entry Placeholder="Текст сообщения" PlaceholderColor="#89888d" Grid.Row="5" Margin="16,0,10,0" x:Name="ContentText"/>
+        <Button Text="Отправить" CornerRadius="15" TextColor="White" BackgroundColor="#64b7e4" Grid.Row="6" Margin="20,0,20,0" Clicked="Button_Clicked"/>
+        <ImageButton x:Name="baner" Grid.Row="7" Aspect="AspectFill" Clicked="Baner_Clicked"/>
+    </Grid>
+</ContentPage>

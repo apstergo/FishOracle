@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fishphone.Parser" Title="Клёв">
+
+    <StackLayout BackgroundColor="Black" Padding="0" Spacing="0">
+    <ScrollView>
+        <Grid RowSpacing="0" Margin="0" Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="350"/>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="0"/>
+                    <!--<RowDefinition Height="50"/>-->
+                </Grid.RowDefinitions>
+                <Image Source="backgroundimage.png" Aspect="AspectFill" Grid.RowSpan="6" Grid.Row="0"/>
+                <Label Text="Прогноз на завтра 10 сентября" x:Name="T_Date" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                <ActivityIndicator Color="White" IsRunning="True" IsVisible="False" x:Name="ActivityParse" HorizontalOptions="EndAndExpand"/>
+
+                <Grid Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" MinimumHeightRequest="150" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="110"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="1" Source="iconrain.png"  VerticalOptions="End" x:Name="Weather"/>
+
+                    <Image Grid.Row="1" Grid.Column="2" Source="iconhook.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="50"/>
+                    <Label Text="0" FontSize="112" x:Name="TomorrowKlevScore" Grid.Row="1" Grid.Column="1" Margin="0,-30,0,0" HorizontalOptions="CenterAndExpand" TextColor="#ffffff"/>
+                    <Label Text="" FontSize="20" x:Name="TomorrowKlev" Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand" TextColor="#ffffff"/>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="icongauge.png" Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    <Image Source="iconwind2.png" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    <Image Source="iconmoonhalf.png" Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Moon_Ico"/>
+                    <Image Source="iconcalendar.png" Grid.Row="0" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+
+                    <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Gauge_Lable"/>
+                    <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Wind_Lable"/>
+                    <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" x:Name="Moonhalf_Lable"/>
+                    <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Moon_Lable"/>
+                </Grid>
+
+                <BoxView BackgroundColor="White" Margin="5,0,5,0" Grid.Row="3" Opacity="0.8"/>
+
+                <Grid Grid.Row="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="1"/>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="1"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="35"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Прогноз на послезавтра " x:Name="DAT_Date" TextColor="White" FontSize="14" Grid.Row="0" Grid.ColumnSpan="6" HorizontalOptions="CenterAndExpand" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+
+                    <Label Text="" TextColor="White" FontSize="12" Grid.Column="2" Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" x:Name="DATLable"/>
+                    <Image Grid.Column="0" Grid.Row="1" Source="iconrain.png" Margin="10" x:Name="WeatherDAT"/>
+
+                    <Label Text="" TextColor="White" FontSize="24" Grid.Column="4" Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" x:Name="DATScore"/>
+                    <Image Grid.Column="5" Grid.Row="1" Source="iconhook24.png" Margin="2"/>
+
+                    <BoxView BackgroundColor="White" Grid.Column="1" Grid.Row="1" Margin="0,10,0,10" Opacity="0.8"/>
+                    <BoxView BackgroundColor="White" Grid.Column="3" Grid.Row="1" Margin="0,10,0,10" Opacity="0.8"/>
+
+                </Grid>
+
+            <ListView x:Name="Weeklist" Grid.Row="5" RowHeight="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <Label Text="{Binding score}" FontSize="18" />
+                                    <Label Text="{Binding temp}" />
+                                    <Label Text="{Binding preasure}" />
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </Grid>
+    </ScrollView>
+        <AbsoluteLayout HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" BackgroundColor="Black" Margin="0" Padding="0">
+            <ImageButton x:Name="baner" Aspect="AspectFill" Clicked="Baner_Clicked" HeightRequest="50" WidthRequest="300" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+        </AbsoluteLayout>
+    </StackLayout>
+    
+</ContentPage>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Fishphone"
+             x:Class="Fishphone.MainPage"
+             Title="MasterApp">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="Меню"  BackgroundColor="SkyBlue">
+            <ContentPage.Content>
+                <StackLayout Padding="5,30,5,5">
+                    <Button Text="Парсер" Clicked="ButtonPars_click"></Button>
+                    <Button Text="Новости" Clicked="ButtonNews_click"></Button>
+                    <!--<Button Text="Энциклопедия" Clicked="ButtonMan_click"></Button>-->
+                    <Button Text="Отзыв" Clicked="ButtonFed_click"></Button>
+                </StackLayout>
+            </ContentPage.Content>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <ContentPage Title="Master" BackgroundColor="SkyBlue">
+            <ContentPage.Content>
+                <Label Text="Lol" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+            </ContentPage.Content>
+        </ContentPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "283266012374",
+    "firebase_url": "https://ribak-i-riba.firebaseio.com",
+    "project_id": "ribak-i-riba",
+    "storage_bucket": "ribak-i-riba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283266012374:android:7dea0e694f7a34b793e577",
+        "android_client_info": {
+          "package_name": "com.companyname.FishOracle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283266012374-ehg0m003iq9a6l8va4e1ghs82mn13inb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWKzPYD62QHMa3cjoaV8TVC1wo0FqVrbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283266012374-ehg0m003iq9a6l8va4e1ghs82mn13inb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

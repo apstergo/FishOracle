@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fishphone.KlevPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Город" x:Name="CityLable" Grid.Row="0" Grid.ColumnSpan="2"/>
+            <Label Text="Статус" x:Name="StateLable" Grid.Column="0" Grid.Row="1"/>
+            <Label Text="Статус" x:Name="DatLable" Grid.Column="1" Grid.Row="1"/>
+            <Picker x:Name="picker" SelectedIndexChanged="Picker_SelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>Москва</x:String>
+                    <x:String>Санкт-Петербург</x:String>
+                    <x:String>Алтайский край</x:String>
+                    <x:String>Амурская область</x:String>
+                    <x:String>Архангельская область</x:String>
+                    <x:String>Астраханская область</x:String>
+                    <x:String>Белгородская область</x:String>
+                    <x:String>Брянская область</x:String>
+                    <x:String>Владимирская область</x:String>
+                    <x:String>Волгоградская область</x:String>
+                    <x:String>Вологодская область</x:String>
+                    <x:String>Воронежская область</x:String>
+                    <x:String>Еврейская автономная область</x:String>
+                    <x:String>Забайкальский край</x:String>
+                    <x:String>Ивановская область</x:String>
+                    <x:String>Иркутская область</x:String>
+                    <x:String>Калининградская область</x:String>
+                    <x:String>Калужская область</x:String>
+                    <x:String>Камчатский край</x:String>
+                    <x:String>Кемеровская область</x:String>
+                    <x:String>Кировская область</x:String>
+                    <x:String>Костромская область</x:String>
+                    <x:String>Краснодарский край</x:String>
+                    <x:String>Красноярский край</x:String>
+                    <x:String>Курганская область</x:String>
+                    <x:String>Курская область</x:String>
+                    <x:String>Ленинградская область</x:String>
+                    <x:String>Липецкая область</x:String>
+                    <x:String>Магаданская область</x:String>
+                    <x:String>Московская область</x:String>
+                    <x:String>Мурманская область</x:String>
+                    <x:String>Ненецкий автономный округ</x:String>
+                    <x:String>Нижегородская область</x:String>
+                    <x:String>Новгородская область</x:String>
+                    <x:String>Новосибирская область</x:String>
+                    <x:String>Омская область</x:String>
+                    <x:String>Оренбургская область</x:String>
+                    <x:String>Орловская область</x:String>
+                    <x:String>Пензенская область</x:String>
+                    <x:String>Пермский край</x:String>
+                    <x:String>Приморский край</x:String>
+                    <x:String>Псковская область</x:String>
+                    <x:String>Республика Адыгея</x:String>
+                    <x:String>Республика Алтай</x:String>
+                    <x:String>Республика Башкортостан</x:String>
+                    <x:String>Республика Бурятия</x:String>
+                    <x:String>Республика Дагестан</x:String>
+                    <x:String>Республика Ингушетия</x:String>
+                    <x:String>Карачаево-Черкесия</x:String>
+                    <x:String>Кабардино-Балкария</x:String>
+                    <x:String>Республика Калмыкия</x:String>
+                    <x:String>Республика Карелия</x:String>
+                    <x:String>Республика Коми</x:String>
+                    <x:String>Республика Крым</x:String>
+                    <x:String>Республика Марий Эл</x:String>
+                    <x:String>Республика Мордовия</x:String>
+                    <x:String>Республика Саха (Якутия)</x:String>
+                    <x:String>Республика Северная Осетия</x:String>
+                    <x:String>Республика Татарстан</x:String>
+                    <x:String>Республика Тыва</x:String>
+                    <x:String>Республика Удмуртия</x:String>
+                    <x:String>Республика Хакасия</x:String>
+                    <x:String>Чеченская Республика</x:String>
+                    <x:String>Чувашская Республика</x:String>
+                    <x:String>Ростовская область</x:String>
+                    <x:String>Рязанская область</x:String>
+                    <x:String>Самарская область</x:String>
+                    <x:String>Саратовская область</x:String>
+                    <x:String>Сахалинская область</x:String>
+                    <x:String>Свердловская область</x:String>
+                    <x:String>Смоленская область</x:String>
+                    <x:String>Ставропольский край</x:String>
+                    <x:String>Тамбовская область</x:String>
+                    <x:String>Тверская область</x:String>
+                    <x:String>Томская область</x:String>
+                    <x:String>Тульская область</x:String>
+                    <x:String>Тюменская область</x:String>
+                    <x:String>Ульяновская область</x:String>
+                    <x:String>Хабаровский край</x:String>
+                    <x:String>ХМАО - Югра</x:String>
+                    <x:String>Челябинская область</x:String>
+                    <x:String>Чукотский автономный округ</x:String>
+                    <x:String>ЯНАО</x:String>
+                    <x:String>Ярославская область</x:String>
+                </Picker.Items>
+            </Picker>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

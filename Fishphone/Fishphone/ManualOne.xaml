@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fishphone.ManualOne">
+    <ScrollView>
+        <Grid BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="Picc" Aspect="AspectFit" Grid.Row="1"/>
+            <Label x:Name="lableTitli" Grid.Row="0" FontSize="20" TextColor="#282936" FontAttributes="Bold" VerticalOptions="Center" Margin="15,5,15,5"/>
+            <Label x:Name="lableText" Grid.Row="2"  FontSize="18" TextColor="#787981" Margin="15,5,15,5"/>
+            <ImageButton x:Name="baner" Grid.Row="3" Aspect="AspectFill" Clicked="Baner_Clicked"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>
