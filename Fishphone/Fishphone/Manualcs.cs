@@ -11,5 +11,16 @@ namespace Fishphone
         public string pictureref { get; set; }
         public string opis { get; set; }
         public string prev { get; set; }
+        public string NameSort
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(nameitem) || nameitem.Length == 0)
+                    return "?";
+
+                return nameitem[0].ToString().ToUpper();
+            }
+        }
     }
+
 }

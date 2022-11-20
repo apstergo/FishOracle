@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Fishphone"
              x:Class="Fishphone.Feedback" Title="Написать нам">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,6 +21,9 @@
         <Label Text="Не обязательно" FontSize="10" Grid.Row="4" Margin="20,0,20,0"/>
         <Entry Placeholder="Текст сообщения" PlaceholderColor="#89888d" Grid.Row="5" Margin="16,0,10,0" x:Name="ContentText"/>
         <Button Text="Отправить" CornerRadius="15" TextColor="White" BackgroundColor="#64b7e4" Grid.Row="6" Margin="20,0,20,0" Clicked="Button_Clicked"/>
-        <ImageButton x:Name="baner" Grid.Row="7" Aspect="AspectFill" Clicked="Baner_Clicked"/>
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HeightRequest="50" VerticalOptions="EndAndExpand" Grid.Row="7">
+            <BoxView BackgroundColor="#61616b" Grid.Row="0"/>
+            <local:AdMobView AdUnitId="ca-app-pub-8506357682481775/1786613753" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="50" Grid.Row="0"/>
+        </Grid>
     </Grid>
 </ContentPage>

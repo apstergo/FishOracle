@@ -1,27 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Fishphone"
              x:Class="Fishphone.Parser" Title="Клёв">
 
-    <StackLayout BackgroundColor="Black" Padding="0" Spacing="0">
-    <ScrollView>
-        <Grid RowSpacing="0" Margin="0" Padding="0">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
+            <Grid RowSpacing="0" Margin="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                    <RowDefinition Height="350"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="75"/>
                     <RowDefinition Height="2"/>
                     <RowDefinition Height="90"/>
                     <RowDefinition Height="0"/>
                     <!--<RowDefinition Height="50"/>-->
                 </Grid.RowDefinitions>
-                <Image Source="backgroundimage.png" Aspect="AspectFill" Grid.RowSpan="6" Grid.Row="0"/>
+                <Image Source="backgroundimage.png" Aspect="AspectFill" Grid.RowSpan="6" Grid.Row="0" x:Name="BGImage"/>
                 <Label Text="Прогноз на завтра 10 сентября" x:Name="T_Date" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontAttributes="Bold"/>
                 <ActivityIndicator Color="White" IsRunning="True" IsVisible="False" x:Name="ActivityParse" HorizontalOptions="EndAndExpand"/>
 
                 <Grid Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" MinimumHeightRequest="150" RowSpacing="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="110"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
@@ -30,10 +36,18 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.Column="1" Source="iconrain.png"  VerticalOptions="End" x:Name="Weather"/>
+                    <Image Grid.Row="0" Grid.Column="1" Source="iconrain.png"  VerticalOptions="End" x:Name="Weather" Margin="0,0,0,15"/>
 
-                    <Image Grid.Row="1" Grid.Column="2" Source="iconhook.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="50"/>
-                    <Label Text="0" FontSize="112" x:Name="TomorrowKlevScore" Grid.Row="1" Grid.Column="1" Margin="0,-30,0,0" HorizontalOptions="CenterAndExpand" TextColor="#ffffff"/>
+                    <!--<Label Grid.Row="1" Grid.Column="2"  VerticalOptions="EndAndExpand" Text="%" FontSize="25" Padding="10,0,0,0"/>-->
+                    <!--<Image Grid.Row="1" Grid.Column="2" Source="iconhook.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="35" Margin="10"/>-->
+                    <Label Text="0" Grid.Row="1" Grid.Column="1" Margin="0,-30,0,0" HorizontalOptions="CenterAndExpand" TextColor="#ffffff">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span x:Name="TomorrowKlevScore" FontSize="112"/>
+                                <Span x:Name="TomorrowKlevProc" Text="" FontSize="30"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label Text="" FontSize="20" x:Name="TomorrowKlev" Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand" TextColor="#ffffff"/>
                 </Grid>
 
@@ -51,17 +65,17 @@
                     <Image Source="icongauge.png" Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                     <Image Source="iconwind2.png" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                     <Image Source="iconmoonhalf.png" Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Moon_Ico"/>
-                    <Image Source="iconcalendar.png" Grid.Row="0" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    <Image Source="temperature.png" Grid.Row="0" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
                     <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Gauge_Lable"/>
                     <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Wind_Lable"/>
                     <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" x:Name="Moonhalf_Lable"/>
-                    <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Moon_Lable"/>
+                    <Label Text="" TextColor="White" FontSize="12" Grid.Row="1" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" x:Name="Temp_Lable"/>
                 </Grid>
 
-                <BoxView BackgroundColor="White" Margin="5,0,5,0" Grid.Row="3" Opacity="0.8"/>
+                <BoxView BackgroundColor="White" Margin="5,0,5,0" Grid.Row="3" Opacity="0.8" IsVisible="False"/>
 
-                <Grid Grid.Row="4">
+                <Grid Grid.Row="4" IsVisible="False">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="2*"/>
@@ -88,27 +102,131 @@
 
                 </Grid>
 
-            <ListView x:Name="Weeklist" Grid.Row="5" RowHeight="100">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout>
-                                    <Label Text="{Binding score}" FontSize="18" />
-                                    <Label Text="{Binding temp}" />
-                                    <Label Text="{Binding preasure}" />
-                                </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
-        </Grid>
-    </ScrollView>
-        <AbsoluteLayout HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" BackgroundColor="Black" Margin="0" Padding="0">
-            <ImageButton x:Name="baner" Aspect="AspectFill" Clicked="Baner_Clicked" HeightRequest="50" WidthRequest="300" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+              
+
+            </Grid>
+        </ScrollView>
+        <AbsoluteLayout Grid.RowSpan="2" Padding="0">
+            <Frame BackgroundColor="White" VerticalOptions="EndAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" CornerRadius="15" x:Name="bottomSheet"  Padding="0,0,0,0" TranslationY="45" HeightRequest="150">
+                <Frame.GestureRecognizers>
+                    <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated"/>
+                </Frame.GestureRecognizers>
+                <StackLayout Spacing="0">
+                    <BoxView BackgroundColor="#E5E5E5" WidthRequest="25" HeightRequest="3" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" CornerRadius="15"/>
+                    <StackLayout BackgroundColor="#64B7E4" HeightRequest="35" VerticalOptions="StartAndExpand" Margin="0,8,0,0">
+                        <Label Text="Прогноз на неделю" TextColor="White" FontSize="14" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"  x:Name="KlewWeekTitle" IsVisible="True"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout BackgroundColor="White" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" TranslationY="2900" x:Name="Filler" Padding="0">
+                <StackLayout>
+                    <ListView x:Name="Weeklist" RowHeight="84" SeparatorVisibility="None" SelectionMode="None" ItemSelected="Weeklist_ItemSelected">
+                        <ListView.Header>
+                            <Grid BackgroundColor="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75"/>
+                                    <ColumnDefinition Width="1"/>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="1"/>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="1"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="35"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="80" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Column="2" Grid.Row="0" Margin="5,0,5,10" RowSpacing="0" VerticalOptions="Center" Padding="0,0,0,5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="15"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Source="{Binding weather}" Margin="5,15,5,0" Grid.Row="0" x:Name="TodayWeather"/>
+                                    <Label Text="{Binding temp}" TextColor="#626067" FontSize="10" Grid.Row="1" HorizontalOptions="Center" x:Name="TodayTemp"/>
+                                </Grid>
+
+                                <Label TextColor="#626067" FontSize="12" Grid.Column="0" Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="5,0,5,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding date}" x:Name="TodayDate"/>
+                                            <Span Text="{x:Static x:Environment.NewLine}"/>
+                                            <Span Text="{Binding dayweek}" x:Name="TodayWeekDay"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                <Label Text="" TextColor="#626067" FontSize="12" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" x:Name="TodayStatus" Grid.Row="0"/>
+
+                                <Label Text="" TextColor="#626067" FontSize="20" Grid.Column="6" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" x:Name="TodayScore" Grid.Row="0"/>
+                                <Image Grid.Column="7" Source="darkhook.png" Margin="2" Grid.Row="0"/>
+
+                                <BoxView BackgroundColor="#626067" Grid.Column="1" Margin="0,30,0,30" Opacity="0.8" Grid.Row="0"/>
+                                <BoxView BackgroundColor="#626067" Grid.Column="3" Margin="0,30,0,30" Opacity="0.8" Grid.Row="0"/>
+                                <BoxView BackgroundColor="#626067" Grid.Column="5" Margin="0,30,0,30" Opacity="0.8" Grid.Row="0"/>
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell IsEnabled="False">
+                                    <ViewCell.View>
+                                        <Grid BackgroundColor="#EEEEEE" Margin="0,20,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="75"/>
+                                                <ColumnDefinition Width="1"/>
+                                                <ColumnDefinition Width="70"/>
+                                                <ColumnDefinition Width="1"/>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="1"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="35"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label TextColor="#626067" FontSize="12" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="5,0,5,0">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding date}"/>
+                                                        <Span Text="{x:Static x:Environment.NewLine}"/>
+                                                        <Span Text="{Binding dayweek}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <Grid Grid.Column="2" Margin="5,0,5,10" RowSpacing="0" VerticalOptions="Center" Padding="0,0,0,5">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="40"/>
+                                                    <RowDefinition Height="15"/>
+                                                </Grid.RowDefinitions>
+                                                <Image Source="{Binding weather}" Margin="5,15,5,0" Grid.Row="0"/>
+                                                <Label Text="{Binding temp}" TextColor="#626067" FontSize="10" Grid.Row="1" HorizontalOptions="Center"/>
+                                            </Grid>
+                                            
+                                            <Label Text="{Binding status}" TextColor="#626067" FontSize="12" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="5,0,5,0"/>
+
+                                            <Label Text="{Binding score}" TextColor="#626067" FontSize="20" Grid.Column="6" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                                            <Image Grid.Column="7" Source="darkhook.png" Margin="2"/>
+
+                                            <BoxView BackgroundColor="#626067" Grid.Column="1" Margin="0,25,0,25" Opacity="0.8"/>
+                                            <BoxView BackgroundColor="#626067" Grid.Column="3" Margin="0,25,0,25" Opacity="0.8"/>
+                                            <BoxView BackgroundColor="#626067" Grid.Column="5" Margin="0,25,0,25" Opacity="0.8"/>
+                                        </Grid>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Footer>
+                            <BoxView BackgroundColor="Transparent" HeightRequest="140"/>
+                        </ListView.Footer>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HeightRequest="50" VerticalOptions="EndAndExpand" x:Name="BanerGrid">
+                <BoxView BackgroundColor="#61616b" Grid.Row="0" x:Name="BanerBG" />
+                <local:AdMobView AdUnitId="ca-app-pub-8506357682481775/1786613753" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="50" Grid.Row="0" IsVisible="True"/>
+            </Grid>
         </AbsoluteLayout>
-    </StackLayout>
+        
+    </Grid>
     
 </ContentPage>

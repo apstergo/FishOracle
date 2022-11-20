@@ -27,14 +27,31 @@ namespace Fishphone
         {
             InitializeComponent();
             Subscribe();
-            baner.Source = null;
-            baner.Source = new UriImageSource { CachingEnabled = true, Uri = new Uri("http://ribakiriba.ru/advertisingplace.png") };
+            //baner.Source = null;
             T_Date.Text = "Прогноз на завтра " + DateTime.Now.AddDays(1).ToString("M");
-            DAT_Date.Text = "Прогноз на послезавтра " + DateTime.Now.AddDays(2).ToString("M");
-            
+            if(BanerBG.Color==Color.Transparent)
+            {
+                BanerGrid.IsVisible = false;
+            }
+            //DAT_Date.Text = "Прогноз на послезавтра " + DateTime.Now.AddDays(2).ToString("M");
+            if(Device.RuntimePlatform==Device.Android)
+            {
+                Advert();
+            }
         }
 
-       
+
+        private async void Advert()
+        {
+            DependencyService.Get<IAdInterstitial>().LoadAd();
+            await Task.Delay(10000);
+            DependencyService.Get<IAdInterstitial>().LoadAd();
+            await Task.Delay(1500);
+            DependencyService.Get<IAdInterstitial>().ShowAd();
+        }
+
+        bool PanelVisible = false;
+        double y;
 
         public async  void RunAsyc(int ind)
         {
@@ -45,130 +62,22 @@ namespace Fishphone
                 ActivityParse.IsVisible = true;
                 TomorrowKlev.Text = "";
                 TomorrowKlevScore.Text = "";
+                TomorrowKlevProc.Text = "";
                 Gauge_Lable.Text = "";
-                Moon_Lable.Text = "";
+                Temp_Lable.Text = "";
                 Moonhalf_Lable.Text = "";
                 Wind_Lable.Text = "";
-                DATLable.Text = "";
-                DATScore.Text = "";
-                WeatherDAT.Source = "";
+                TodayStatus.Text = "";
+                TodayScore.Text = "";
+                TodayWeather.Source = "";
                 Weather.Source = "";
 
                 using (HttpClient client = new HttpClient())
                 {
                     string s;
-                    client.BaseAddress = new Uri("http://ribakiriba.ru");
+                    client.BaseAddress = new Uri("Uri");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    //HttpResponseMessage response = await client.GetAsync("api/parser.php");
-                    //if (response.IsSuccessStatusCode)
-                    //{
-                    //    s = await response.Content.ReadAsStringAsync();
-                    //    JObject json = JObject.Parse(s);
-                    //    var str = json.SelectToken(@"$." + ind.ToString());
-                    //    Citycs city = new Citycs();
-                    //    var citInfo = JsonConvert.DeserializeObject<Citycs>(str.ToString());
-                    //    //TomorrowKlev.Text = citInfo.status;
-                    //    //TomorrowKlevScore.Text = citInfo.score;
-                    //    //Gauge_Lable.Text = citInfo.preasure;
-                    //    //Moon_Lable.Text = citInfo.moonday;
-                    //    //Moonhalf_Lable.Text = citInfo.moon;
-
-                    //    //if (citInfo.moon == "убывающая луна")
-                    //    //{
-                    //    //    Moon_Ico.Source = "iconmoonhalf2.png";
-                    //    //}
-                    //    //else if (citInfo.moon == "Полнолуние")
-                    //    //{
-                    //    //    Moon_Ico.Source = "iconfullmoon.png";
-                    //    //}
-                    //    //else if (citInfo.moon == "1-я четверть")
-                    //    //{
-                    //    //    Moon_Ico.Source = "iconcrescent.png";
-                    //    //}
-                    //    //else
-                    //    //{
-                    //    //    Moon_Ico.Source = "iconfullmoon.png";
-                    //    //}
-
-
-                    //    //if (citInfo.weather == "sun")
-                    //    //{
-                    //    //    Weather.Source = "sanny.png";
-                    //    //}
-                    //    //else if (citInfo.weather == "cloud-rain")
-                    //    //{
-                    //    //    Weather.Source = "iconrain.png";
-                    //    //}
-                    //    //else if (citInfo.weather == "cloud")
-                    //    //{
-                    //    //    Weather.Source = "cloudy1.png";
-                    //    //}
-                    //    //else if (citInfo.weather == "cloud-storm-rain")
-                    //    //{
-                    //    //    Weather.Source = "iconrain2.png";
-                    //    //}
-                    //    //else if (citInfo.weather == "sun-cloud")
-                    //    //{
-                    //    //    Weather.Source = "cloudy.png";
-                    //    //}
-                    //    //else if (citInfo.weather == "sun-cloud-rain")
-                    //    //{
-                    //    //    Weather.Source = "iconcloudy1.png";
-                    //    //}
-                    //    //else if (citInfo.weather == "sun")
-                    //    //{
-                    //    //    Weather.Source = "";
-                    //    //}
-                    //    //else
-                    //    //{
-                    //    //    Weather.Source = "sanny.png";
-                    //    //}
-
-
-                    //    //if (citInfo.weather_dat == "sun")
-                    //    //{
-                    //    //    WeatherDAT.Source = "sanny.png";
-                    //    //}
-                    //    //else if (citInfo.weather_dat == "cloud-rain")
-                    //    //{
-                    //    //    WeatherDAT.Source = "iconrain.png";
-                    //    //}
-                    //    //else if (citInfo.weather_dat == "cloud")
-                    //    //{
-                    //    //    WeatherDAT.Source = "cloudy1.png";
-                    //    //}
-                    //    //else if (citInfo.weather_dat == "cloud-storm-rain")
-                    //    //{
-                    //    //    WeatherDAT.Source = "iconrain2.png";
-                    //    //}
-                    //    //else if (citInfo.weather_dat == "sun-cloud")
-                    //    //{
-                    //    //    WeatherDAT.Source = "cloudy.png";
-                    //    //}
-                    //    //else if (citInfo.weather_dat == "sun-cloud-rain")
-                    //    //{
-                    //    //    WeatherDAT.Source = "iconcloudy1.png";
-                    //    //}
-                    //    //else if (citInfo.weather_dat == "sun")
-                    //    //{
-                    //    //    WeatherDAT.Source = "";
-                    //    //}
-                    //    //else
-                    //    //{
-                    //    //    WeatherDAT.Source = "sanny.png";
-                    //    //}
-
-                    //    //Wind_Lable.Text = citInfo.wind;
-                    //    //DATLable.Text = citInfo.status_dat;
-                    //    //DATScore.Text = citInfo.score_dat;
-                    //    //CityLable.Text = citInfo.city;
-                    //    //StateLable.Text = citInfo.status+" / "+citInfo.score+" / "+citInfo.weather;
-                    //    //Weather.Text=citInfo.preasure + " / "+ citInfo.moonday + " / "+ citInfo.wind + " / " + citInfo.moon;
-                    //    //DatLable.Text = citInfo.status_dat + " / " + citInfo.score_dat + " / " + citInfo.weather_dat;
-                    //    //DatWeather.Text = citInfo.preasure_dat + " / " + citInfo.moonday_dat + " / " + citInfo.wind_dat + " / " + citInfo.moon_dat;
-                    //}
 
 
 
@@ -187,16 +96,30 @@ namespace Fishphone
                         var result = await response.Content.ReadAsStringAsync();
                         JArray jsonn = JArray.Parse(result);
                         klevweek = JsonConvert.DeserializeObject<List<KlevWeek>>(jsonn.ToString());
-
-
                         dat = klevweek.Find(x => x.day.Contains("2"));
                         today = klevweek.FirstOrDefault();
                         TomorrowKlev.Text = today.status;
                         TomorrowKlevScore.Text = today.score;
+                        TomorrowKlevProc.Text = "%";
                         Gauge_Lable.Text = today.preasure;
-                        Moon_Lable.Text = today.moonday;
+                        Temp_Lable.Text = today.temp;
                         Moonhalf_Lable.Text = today.moon;
 
+                        if (Convert.ToInt32(today.score) > 70)
+                        {
+                            BGImage.Source = "GoodFishBite.png";
+                        }
+                        else
+                        {
+                            BGImage.Source = "BadFishBite.png";
+                        }
+
+                        TodayStatus.Text= today.status;
+                        TodayScore.Text = today.score;
+                        TodayWeather.Source = "dark"+today.weather;
+                        TodayTemp.Text = today.temp;
+                        TodayWeekDay.Text = DateTime.Now.ToString("ddd");
+                        TodayDate.Text = DateTime.Now.ToString("dd.MM");
 
                         if (today.moon == "убывающая луна")
                         {
@@ -215,75 +138,110 @@ namespace Fishphone
                             Moon_Ico.Source = "iconfullmoon.png";
                         }
 
-
-                        if (today.weather == "sun")
-                        {
-                            Weather.Source = "sanny.png";
-                        }
-                        else if (today.weather == "cloud-rain")
-                        {
-                            Weather.Source = "iconrain.png";
-                        }
-                        else if (today.weather == "cloud")
-                        {
-                            Weather.Source = "cloudy1.png";
-                        }
-                        else if (today.weather == "cloud-storm-rain")
-                        {
-                            Weather.Source = "iconrain2.png";
-                        }
-                        else if (today.weather == "sun-cloud")
-                        {
-                            Weather.Source = "cloudy.png";
-                        }
-                        else if (today.weather == "sun-cloud-rain")
-                        {
-                            Weather.Source = "iconcloudy1.png";
-                        }
-                        else
-                        {
-                            Weather.Source = "sanny.png";
-                        }
-
-
-                        if (dat.weather == "sun")
-                        {
-                            WeatherDAT.Source = "sanny.png";
-                        }
-                        else if (dat.weather == "cloud-rain")
-                        {
-                            WeatherDAT.Source = "iconrain.png";
-                        }
-                        else if (dat.weather == "cloud")
-                        {
-                            WeatherDAT.Source = "cloudy1.png";
-                        }
-                        else if (dat.weather == "cloud-storm-rain")
-                        {
-                            WeatherDAT.Source = "iconrain2.png";
-                        }
-                        else if (dat.weather == "sun-cloud")
-                        {
-                            WeatherDAT.Source = "cloudy.png";
-                        }
-                        else if (dat.weather == "sun-cloud-rain")
-                        {
-                            WeatherDAT.Source = "iconcloudy1.png";
-                        }
-                        else if (dat.weather == "sun")
-                        {
-                            WeatherDAT.Source = "";
-                        }
-                        else
-                        {
-                            WeatherDAT.Source = "sanny.png";
-                        }
-
+                        Weather.Source = today.weather;
                         Wind_Lable.Text = dat.wind;
                         DATLable.Text = dat.status;
                         DATScore.Text = dat.score;
 
-                        Weeklist.ItemsSource = klevweek;
+
+                        List<KlevWeek> klevweek1 = new List<KlevWeek>();
+                        klevweek1 = klevweek;
+                        DateTime dt = DateTime.Now;
+
+                        var itemToDelete = klevweek1.Where(x => x.day == "1").Select(x => x).First();
+                        klevweek1.RemoveRange(0, 1);
+
+                        klevweek1.ForEach(delegate (KlevWeek kl) {
+                            dt = dt.AddDays(1);
+                            kl.weather = "dark" + kl.weather;
+                            kl.date = dt.Date.ToString("dd.MM");
+                            kl.dayweek= dt.Date.ToString("ddd");
+                        });         
+
+                        
+                        Weeklist.ItemsSource = klevweek1;
+                        klevweek1 =null;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var klewcache = await BlobCache.UserAccount.GetObject<List<KlevWeek>>("ParserLastCityCache");
+                            MessagingCenter.Send<Parser>(this, "DefultCity");
+                            if (klewcache != null)
+                            {
+                                dat = klewcache.Find(x => x.day.Contains("2"));
+                                today = klewcache.FirstOrDefault();
+                                TomorrowKlev.Text = today.status;
+                                TomorrowKlevScore.Text = today.score;
+                                TomorrowKlevProc.Text = "%";
+                                Gauge_Lable.Text = today.preasure;
+                                Temp_Lable.Text = today.temp;
+                                Moonhalf_Lable.Text = today.moon;
+
+                                if(Convert.ToInt32(today.score)>70)
+                                {
+                                    BGImage.Source = "GoodFishBite.png";
+                                }
+                                else
+                                {
+                                    BGImage.Source = "BadFishBite.png";
+                                }
+
+                                TodayStatus.Text = today.status;
+                                TodayScore.Text = today.score;
+                                TodayWeather.Source = "dark" + today.weather;
+                                TodayTemp.Text = today.temp;
+                                TodayWeekDay.Text = DateTime.Now.ToString("ddd");
+                                TodayDate.Text = DateTime.Now.ToString("dd.MM");
+
+                                if (today.moon == "убывающая луна")
+                                {
+                                    Moon_Ico.Source = "iconmoonhalf2.png";
+                                }
+                                else if (today.moon == "Полнолуние")
+                                {
+                                    Moon_Ico.Source = "iconfullmoon.png";
+                                }
+                                else if (today.moon == "1-я четверть")
+                                {
+                                    Moon_Ico.Source = "iconcrescent.png";
+                                }
+                                else
+                                {
+                                    Moon_Ico.Source = "iconfullmoon.png";
+                                }
+
+                                WeatherDAT.Source = dat.weather;
+
+
+                                Wind_Lable.Text = dat.wind;
+                                DATLable.Text = dat.status;
+                                DATScore.Text = dat.score;
+
+                                List<KlevWeek> klevweek1 = new List<KlevWeek>();
+                                klevweek1 = klevweek;
+                                DateTime dt = DateTime.Now;
+
+                                var itemToDelete = klevweek1.Where(x => x.day == "1").Select(x => x).First();
+                                klevweek1.RemoveRange(0, 1);
+
+                                klevweek1.ForEach(delegate (KlevWeek kl) {
+                                    dt = dt.AddDays(1);
+                                    kl.weather = "dark" + kl.weather;
+                                    kl.date = dt.Date.ToString("dd.MM");
+                                    kl.dayweek = dt.Date.ToString("ddd");
+                                });
+
+
+                                Weeklist.ItemsSource = klevweek1;
+                                ActivityParse.IsVisible = false;
+                            }
+                        }
+                        catch
+                        {
+                            MessagingCenter.Send<Parser>(this, "DefultCity");
+                        }
                     }
 
                     var values1 = new Dictionary<string, string>
@@ -298,6 +256,7 @@ namespace Fishphone
                     var response1 = await client.PostAsync("api/klevweekstat.php", content1);
                     if (response1.IsSuccessStatusCode)
                     {
+                        //DisplayAlert("", "cache", "ok");
                         var result1 = await response1.Content.ReadAsStringAsync();
                         JArray jsonn = JArray.Parse(result1);
                         klevweek = JsonConvert.DeserializeObject<List<KlevWeek>>(jsonn.ToString());
@@ -306,8 +265,9 @@ namespace Fishphone
                 }
                     ActivityParse.IsVisible = false;
             }
-            catch
+            catch(Exception ex)
             {
+                //DisplayAlert("", ex.ToString(), "ok");
                 try
                 {
                     var klewcache = await BlobCache.UserAccount.GetObject<List<KlevWeek>>("ParserLastCityCache");
@@ -318,10 +278,18 @@ namespace Fishphone
                         today = klewcache.FirstOrDefault();
                         TomorrowKlev.Text = today.status;
                         TomorrowKlevScore.Text = today.score;
+                        TomorrowKlevProc.Text = "%";
                         Gauge_Lable.Text = today.preasure;
-                        Moon_Lable.Text = today.moonday;
+                        Temp_Lable.Text = today.temp;
                         Moonhalf_Lable.Text = today.moon;
 
+
+                        TodayStatus.Text = today.status;
+                        TodayScore.Text = today.score;
+                        TodayWeather.Source = "dark" + today.weather;
+                        TodayTemp.Text = today.temp;
+                        TodayWeekDay.Text = DateTime.Now.ToString("ddd");
+                        TodayDate.Text = DateTime.Now.ToString("dd.MM");
 
                         if (today.moon == "убывающая луна")
                         {
@@ -340,80 +308,35 @@ namespace Fishphone
                             Moon_Ico.Source = "iconfullmoon.png";
                         }
 
+                        WeatherDAT.Source = dat.weather;
 
-                        if (today.weather == "sun")
-                        {
-                            Weather.Source = "sanny.png";
-                        }
-                        else if (today.weather == "cloud-rain")
-                        {
-                            Weather.Source = "iconrain.png";
-                        }
-                        else if (today.weather == "cloud")
-                        {
-                            Weather.Source = "cloudy1.png";
-                        }
-                        else if (today.weather == "cloud-storm-rain")
-                        {
-                            Weather.Source = "iconrain2.png";
-                        }
-                        else if (today.weather == "sun-cloud")
-                        {
-                            Weather.Source = "cloudy.png";
-                        }
-                        else if (today.weather == "sun-cloud-rain")
-                        {
-                            Weather.Source = "iconcloudy1.png";
-                        }
-                        else
-                        {
-                            Weather.Source = "sanny.png";
-                        }
-
-
-                        if (dat.weather == "sun")
-                        {
-                            WeatherDAT.Source = "sanny.png";
-                        }
-                        else if (dat.weather == "cloud-rain")
-                        {
-                            WeatherDAT.Source = "iconrain.png";
-                        }
-                        else if (dat.weather == "cloud")
-                        {
-                            WeatherDAT.Source = "cloudy1.png";
-                        }
-                        else if (dat.weather == "cloud-storm-rain")
-                        {
-                            WeatherDAT.Source = "iconrain2.png";
-                        }
-                        else if (dat.weather == "sun-cloud")
-                        {
-                            WeatherDAT.Source = "cloudy.png";
-                        }
-                        else if (dat.weather == "sun-cloud-rain")
-                        {
-                            WeatherDAT.Source = "iconcloudy1.png";
-                        }
-                        else if (dat.weather == "sun")
-                        {
-                            WeatherDAT.Source = "";
-                        }
-                        else
-                        {
-                            WeatherDAT.Source = "sanny.png";
-                        }
 
                         Wind_Lable.Text = dat.wind;
                         DATLable.Text = dat.status;
                         DATScore.Text = dat.score;
 
-                        Weeklist.ItemsSource = klevweek;
+                        List<KlevWeek> klevweek1 = new List<KlevWeek>();
+                        klevweek1 = klewcache;
+                        DateTime dt = DateTime.Now;
+
+                        var itemToDelete = klevweek1.Where(x => x.day == "1").Select(x => x).First();
+                        klevweek1.RemoveRange(0, 1);
+
+                        klevweek1.ForEach(delegate (KlevWeek kl) {
+                            dt = dt.AddDays(1);
+                            kl.weather = "dark" + kl.weather;
+                            kl.date = dt.Date.ToString("dd.MM");
+                            kl.dayweek = dt.Date.ToString("ddd");
+                        });
+
+
+                        Weeklist.ItemsSource = klevweek1;
                         ActivityParse.IsVisible = false;
                     }
                 }
-                catch
+                catch(Exception exx)
                 {
+                    //DisplayAlert("", exx.ToString(), "ok");
                     MessagingCenter.Send<Parser>(this, "DefultCity");
                 }
             }
@@ -423,11 +346,11 @@ namespace Fishphone
             MessagingCenter.Subscribe<TabbPage>(
                 this, // кто подписывается на сообщения
                 "CitySelect",   // название сообщения
-                (sender) => { RunAsyc(TabbPage.pickerSelectId+1); });    // вызываемое действие
+                (sender) => { RunAsyc(TabbPage.pickerSelectId); });    // вызываемое действие
             MessagingCenter.Subscribe<TabbPage>(
                 this, // кто подписывается на сообщения
                 "FirstGeo",   // название сообщения
-                (sender) => { RunAsyc(TabbPage.pickerSelectId+1); });    // вызываемое действие
+                (sender) => { RunAsyc(TabbPage.pickerSelectId); });    // вызываемое действие
         }
         private void picker_SelectedIndexChanged(object sender,EventArgs e)
         {
@@ -439,8 +362,50 @@ namespace Fishphone
 
         private void Baner_Clicked(object sender, EventArgs e)
         {
-            baner.Source = null;
-            baner.Source = new UriImageSource { CachingEnabled = true, Uri = new Uri("http://ribakiriba.ru/advertisingplace.png") };
+            
+        }
+
+        private void PanGestureRecognizer_PanUpdated(object sender, PanUpdatedEventArgs e)
+        {
+            switch (e.StatusType)
+            {
+                case GestureStatus.Running:
+                    var translateY = Math.Max(Math.Min(0, y + e.TotalY), -Math.Abs(10 - Height));
+                    Filler.TranslateTo(bottomSheet.X, translateY + (Height-bottomSheet.Height+65), 40);
+                    bottomSheet.TranslateTo(bottomSheet.X, translateY, 40);
+                    break;
+                case GestureStatus.Completed:
+                    y = bottomSheet.TranslationY;
+                    if ((Math.Abs(y) > Height / 20) && !PanelVisible)
+                    {
+                            bottomSheet.TranslateTo(bottomSheet.X, -(Height - 160), 50);
+                            Filler.TranslationY = 0;
+                            Filler.TranslateTo(bottomSheet.X, 65, 50);
+                            PanelVisible = true;
+                    }
+                    else
+                    {
+                        if (PanelVisible)
+                        {
+                            bottomSheet.TranslateTo(bottomSheet.X, 50, 1);
+                            Filler.TranslateTo(bottomSheet.X, Height - 20, 1);
+                            PanelVisible = false;
+                        }
+                        else
+                        {
+                            bottomSheet.TranslateTo(bottomSheet.X, 50, 1);
+                            Filler.TranslateTo(bottomSheet.X, Height - 20, 1);
+                        }
+                    }
+                    break;
+                    
+            }
+        }
+
+       
+        private void Weeklist_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Weeklist.SelectedItem = null;
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Fishphone
     public partial class TabbPage : TabbedPage
     {
         public static int pickerSelectId =  0;
+        public string[] city_short = new string[] { "msc", "spb", "alt", "amu", "arh", "ast", "belg", "br", "vlad", "volggr", "volgdn", "vor", "eat", "zab", "ivan", "irkut", "kaliningrad", "kalugь", "kamch", "kemer", "kir", "kost", "karasnodar", "krasnoyarsk", "kurg", "kursk", "lenobl", "lip", "magadan", "mscobl", "murm", "NAO", "nijgor", "novgor", "novosib", "omsk", "orenb", "orl", "penz", "perm", "prim", "pskov", "adigeya", "altres", "bashk", "burat", "dag", "ing", "karcher", "kabbal", "kalm", "karel", "komi", "krim", "marial", "mord", "saha", "sevos", "tat", "tiva", "udmurt", "hakasia", "chechnia", "chuv", "rost", "rias", "sam", "sar", "sahalin", "sverd", "smol", "stav", "tamb", "tver", "tomsk", "tulsk", "tum", "ulyan", "hab", "yugra", "chel", "chukot", "yanao", "yaroslavsk" };
+
         public TabbPage ()
         {
             InitializeComponent();
@@ -374,6 +376,13 @@ namespace Fishphone
                         {
                             pickerSelectId = CrossSettings.Current.GetValueOrDefault("DefaultCity", 0);
                         }
+
+                        if(CrossSettings.Current.GetValueOrDefault("DefaultCity", -1)==-1)
+                        {
+                            CrossSettings.Current.AddOrUpdateValue("DefaultCity", pickerSelectId);
+                            DependencyService.Get<ISubcribePush>().Subcribe(city_short[pickerSelectId]);
+                        }
+
                         picker.SelectedIndex =  pickerSelectId;
                     }
                     MessagingCenter.Send<TabbPage>(this, "FirstGeo");
@@ -424,9 +433,10 @@ namespace Fishphone
             picker.Focus();
         }
 
-        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        private async void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
         {
             GeoLoc();
+            
         }
     }
 }

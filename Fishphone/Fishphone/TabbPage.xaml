@@ -2,125 +2,149 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Fishphone"
-             x:Class="Fishphone.TabbPage" BarBackgroundColor="#454752">
+             x:Class="Fishphone.TabbPage" BarBackgroundColor="#454752" BarTextColor="AliceBlue" UnselectedTabColor="#505050" SelectedTabColor="AliceBlue">
   <!--Pages can be added as references or inline-->
-    <TabbedPage.ToolbarItems>
-        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="settings96" Text="Item 1" Priority="0" Clicked="MenuItem1_Clicked"/>
-    </TabbedPage.ToolbarItems>
+    
     <NavigationPage.TitleView>
-        <Grid>
+        <Grid Padding="0,5,0,7" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="mappin.png" Grid.Column="0" Margin="0,5,0,10" x:FieldModifier="public" HeightRequest="25">
+            <Image Source="mappin.png" Grid.Column="0" Margin="0,0,0,0" x:FieldModifier="public" HeightRequest="25">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
                 </Image.GestureRecognizers>
             </Image>
- 
-            <Picker Margin="0,0,5,0" x:Name="picker" SelectedIndexChanged="Picker_SelectedIndexChanged" Title="Выбор города" TextColor="AliceBlue" Grid.Column="1">
+
+            <Picker Margin="0,0,0,0" x:Name="picker" SelectedIndexChanged="Picker_SelectedIndexChanged" Title="Выбор города" TextColor="LightSkyBlue" Grid.Column="1">
                 <Picker.Items>
                     <x:String>Москва</x:String>
                     <x:String>Санкт-Петербург</x:String>
-                    <x:String>Алтайский край</x:String>
-                    <x:String>Амурская область</x:String>
-                    <x:String>Архангельская область</x:String>
-                    <x:String>Астраханская область</x:String>
-                    <x:String>Белгородская область</x:String>
-                    <x:String>Брянская область</x:String>
-                    <x:String>Владимирская область</x:String>
-                    <x:String>Волгоградская область</x:String>
-                    <x:String>Вологодская область</x:String>
-                    <x:String>Воронежская область</x:String>
-                    <x:String>Еврейская автономная область</x:String>
+                    <x:String>Барнаул</x:String>
+                    <x:String>Благовещенск</x:String>
+                    <x:String>Архангельск</x:String>
+                    <x:String>Астрахань</x:String>
+                    <x:String>Белгород</x:String>
+                    <x:String>Брянск</x:String>
+                    <x:String>Владимир</x:String>
+                    <x:String>Волгоград</x:String>
+                    <x:String>Вологода</x:String>
+                    <x:String>Воронеж</x:String>
+                    <x:String>Биробиджан</x:String>
                     <x:String>Забайкальский край</x:String>
-                    <x:String>Ивановская область</x:String>
-                    <x:String>Иркутская область</x:String>
-                    <x:String>Калининградская область</x:String>
-                    <x:String>Калужская область</x:String>
-                    <x:String>Камчатский край</x:String>
-                    <x:String>Кемеровская область</x:String>
-                    <x:String>Кировская область</x:String>
-                    <x:String>Костромская область</x:String>
-                    <x:String>Краснодарский край</x:String>
-                    <x:String>Красноярский край</x:String>
-                    <x:String>Курганская область</x:String>
-                    <x:String>Курская область</x:String>
+                    <x:String>Чита</x:String>
+                    <x:String>Иркутс</x:String>
+                    <x:String>Калининград</x:String>
+                    <x:String>Калуга</x:String>
+                    <x:String>Петропавловск-Камчатский</x:String>
+                    <x:String>Кемерового</x:String>
+                    <x:String>Киров</x:String>
+                    <x:String>Кострома</x:String>
+                    <x:String>Краснодар</x:String>
+                    <x:String>Красноярск</x:String>
+                    <x:String>Курган</x:String>
+                    <x:String>Курск</x:String>
                     <x:String>Ленинградская область</x:String>
-                    <x:String>Липецкая область</x:String>
-                    <x:String>Магаданская область</x:String>
+                    <x:String>Липецк</x:String>
+                    <x:String>Магадан</x:String>
                     <x:String>Московская область</x:String>
-                    <x:String>Мурманская область</x:String>
-                    <x:String>Ненецкий автономный округ</x:String>
-                    <x:String>Нижегородская область</x:String>
-                    <x:String>Новгородская область</x:String>
-                    <x:String>Новосибирская область</x:String>
-                    <x:String>Омская область</x:String>
-                    <x:String>Оренбургская область</x:String>
-                    <x:String>Орловская область</x:String>
-                    <x:String>Пензенская область</x:String>
-                    <x:String>Пермский край</x:String>
-                    <x:String>Приморский край</x:String>
-                    <x:String>Псковская область</x:String>
-                    <x:String>Республика Адыгея</x:String>
-                    <x:String>Республика Алтай</x:String>
-                    <x:String>Республика Башкортостан</x:String>
-                    <x:String>Республика Бурятия</x:String>
-                    <x:String>Республика Дагестан</x:String>
-                    <x:String>Республика Ингушетия</x:String>
-                    <x:String>Карачаево-Черкесия</x:String>
-                    <x:String>Кабардино-Балкария</x:String>
-                    <x:String>Республика Калмыкия</x:String>
-                    <x:String>Республика Карелия</x:String>
-                    <x:String>Республика Коми</x:String>
-                    <x:String>Республика Крым</x:String>
-                    <x:String>Республика Марий Эл</x:String>
-                    <x:String>Республика Мордовия</x:String>
-                    <x:String>Республика Саха (Якутия)</x:String>
-                    <x:String>Республика Северная Осетия</x:String>
-                    <x:String>Республика Татарстан</x:String>
-                    <x:String>Республика Тыва</x:String>
-                    <x:String>Республика Удмуртия</x:String>
-                    <x:String>Республика Хакасия</x:String>
-                    <x:String>Чеченская Республика</x:String>
-                    <x:String>Чувашская Республика</x:String>
-                    <x:String>Ростовская область</x:String>
-                    <x:String>Рязанская область</x:String>
-                    <x:String>Самарская область</x:String>
-                    <x:String>Саратовская область</x:String>
-                    <x:String>Сахалинская область</x:String>
-                    <x:String>Свердловская область</x:String>
-                    <x:String>Смоленская область</x:String>
-                    <x:String>Ставропольский край</x:String>
-                    <x:String>Тамбовская область</x:String>
-                    <x:String>Тверская область</x:String>
-                    <x:String>Томская область</x:String>
-                    <x:String>Тульская область</x:String>
-                    <x:String>Тюменская область</x:String>
-                    <x:String>Ульяновская область</x:String>
-                    <x:String>Хабаровский край</x:String>
-                    <x:String>ХМАО - Югра</x:String>
-                    <x:String>Челябинская область</x:String>
-                    <x:String>Чукотский автономный округ</x:String>
-                    <x:String>ЯНАО</x:String>
-                    <x:String>Ярославская область</x:String>
+                    <x:String>Мурманск</x:String>
+                    <x:String>Нарьян-Мар</x:String>
+                    <x:String>Нижний Новгород</x:String>
+                    <x:String>Великий Новгород</x:String>
+                    <x:String>Новосибирск</x:String>
+                    <x:String>Омск</x:String>
+                    <x:String>Оренбург</x:String>
+                    <x:String>Орел</x:String>
+                    <x:String>Пенза</x:String>
+                    <x:String>Пермь</x:String>
+                    <x:String>Владивосток</x:String>
+                    <x:String>Псков</x:String>
+                    <x:String>Майкоп</x:String>
+                    <x:String>Горно-Алтайск</x:String>
+                    <x:String>Уфа</x:String>
+                    <x:String>Улан</x:String>
+                    <x:String>Махачкала</x:String>
+                    <x:String>Магас</x:String>
+                    <x:String>Черкесск</x:String>
+                    <x:String>Нальчик</x:String>
+                    <x:String>Элиста</x:String>
+                    <x:String>Петрозаводск</x:String>
+                    <x:String>Сыктывкар</x:String>
+                    <x:String>Симферополь</x:String>
+                    <x:String>Йошкар-Ола</x:String>
+                    <x:String>Саранск</x:String>
+                    <x:String>Якутск</x:String>
+                    <x:String>Владикавказ</x:String>
+                    <x:String>Казань</x:String>
+                    <x:String>Кызыл</x:String>
+                    <x:String>Ижевск</x:String>
+                    <x:String>Абакан</x:String>
+                    <x:String>Грозный</x:String>
+                    <x:String>Чебоксары</x:String>
+                    <x:String>Ростов-на-Дону</x:String>
+                    <x:String>Рязань</x:String>
+                    <x:String>Самара</x:String>
+                    <x:String>Саратов</x:String>
+                    <x:String>Южно-Сахалинск</x:String>
+                    <x:String>Екатеринбург</x:String>
+                    <x:String>Смоленск</x:String>
+                    <x:String>Ставрополь</x:String>
+                    <x:String>Тамбов</x:String>
+                    <x:String>Тверь</x:String>
+                    <x:String>Томск</x:String>
+                    <x:String>Тула</x:String>
+                    <x:String>Тюмень</x:String>
+                    <x:String>Ульяновск</x:String>
+                    <x:String>Хабаровск</x:String>
+                    <x:String>Ханты-Мансийск</x:String>
+                    <x:String>Челябинск</x:String>
+                    <x:String>Анадырь</x:String>
+                    <x:String>Салехард</x:String>
+                    <x:String>Ярославль</x:String>
                 </Picker.Items>
+                <Picker.TextColor>
+                    <OnPlatform x:TypeArguments="Color">
+                        <On Platform="Android, UWP">White</On>
+                        <On Platform="iOS">Black</On>
+                    </OnPlatform>
+                </Picker.TextColor>
             </Picker>
-            
+
             <!--<Image Source="down.png" Grid.Column="2" HorizontalOptions="Center" Margin="0,10,0,5">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
                 </Image.GestureRecognizers>
             </Image>-->
-            
         </Grid>
     </NavigationPage.TitleView>
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="settings36" Text="Item 1" Priority="0" Clicked="MenuItem1_Clicked"/>
+    </TabbedPage.ToolbarItems>
     <TabbedPage.Children>
-        <local:Parser/>
+        <local:Parser>
+            <local:Parser.IconImageSource>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="iconhook24.png"/>
+                </OnPlatform>
+            </local:Parser.IconImageSource>
+        </local:Parser>
         <!--<local:News/>-->
-        <local:Manual/>
-        <local:Feedback/>
+        <local:Manual>
+            <local:Manual.IconImageSource>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="book30.png"/>
+                </OnPlatform>
+            </local:Manual.IconImageSource>
+        </local:Manual>
+        <local:Feedback>
+            <local:Feedback.IconImageSource>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="feedback30.png"/>
+                </OnPlatform>
+            </local:Feedback.IconImageSource>
+        </local:Feedback>
     </TabbedPage.Children>
     
 </TabbedPage>

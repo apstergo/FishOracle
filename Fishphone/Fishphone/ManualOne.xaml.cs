@@ -18,13 +18,11 @@ namespace Fishphone
             lableTitli.Text = content.nameitem;
             lableText.Text = content.opis.Replace("<br />", "");
             Picc.Source = content.pictureref;
-            baner.Source = null;
-            baner.Source = new UriImageSource { CachingEnabled = true, Uri = new Uri("http://ribakiriba.ru/advertisingplace.png") };
         }
 
         private void Baner_Clicked(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

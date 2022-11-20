@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Plugin.Settings;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -24,15 +25,22 @@ namespace Fishphone
 		{
 			InitializeComponent ();
             RunAsyc(i);
-            baner.Source = null;
-            baner.Source = new UriImageSource { CachingEnabled = true, Uri = new Uri("http://ribakiriba.ru/advertisingplace.png") };
+          
         }
 
         private async void ListFish_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var content = e.Item as Manualcs;
-            await Navigation.PushAsync(new ManualOne(content));
-            ListFish.SelectedItem = null;
+            try
+            {
+                var content = e.Item as Manualcs;
+                await Navigation.PushAsync(new ManualOne(content));
+                ListFish.SelectedItem = null;
+            }
+            catch
+            {
+
+            }
+
         }
         public async void RunAsyc(int i)
         {
@@ -41,7 +49,7 @@ namespace Fishphone
                 using (HttpClient client = new HttpClient())
                 {
                     string s;
-                    client.BaseAddress = new Uri("http://ribakiriba.ru");
+                    client.BaseAddress = new Uri("Uri");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     if(i==1)
@@ -52,7 +60,12 @@ namespace Fishphone
                             s = await response.Content.ReadAsStringAsync();
                             JArray json = JArray.Parse(s);
                             manualList = JsonConvert.DeserializeObject<List<Manualcs>>(json.ToString());
-                            ListFish.ItemsSource = manualList;
+                            var sorted = from item in manualList
+                                         orderby item.nameitem
+                                         group item by item.NameSort into itemGroup
+                                         select new Grouping<string, Manualcs>(itemGroup.Key, itemGroup);
+                            var ManuaListGrouped = new ObservableCollection<Grouping<string, Manualcs>>(sorted);
+                            ListFish.ItemsSource = ManuaListGrouped;
                         }
                         else
                         {
@@ -110,21 +123,15 @@ namespace Fishphone
                             ListFish.ItemsSource = null;
                             var manualcache = await BlobCache.UserAccount.GetObject<List<Manualcs>>("ManualEngenCache");
                             ListFish.ItemsSource = manualcache;
+                            
                         }
                     }
 
                 }
                 ChaceAll();
             }
-            catch
+            catch(Exception ex)
             {
-                if(i == 1)
-                {
-                    ListFish.ItemsSource = null;
-                    var manualcache = await BlobCache.UserAccount.GetObject<List<Manualcs>>("ManualFishCache");
-                    manualList = manualcache;
-                    ListFish.ItemsSource = manualcache;
-                }
                 if (i == 2)
                 {
                     ListFish.ItemsSource = null;
@@ -149,6 +156,8 @@ namespace Fishphone
             }
         }
 
+       
+
         private async void ChaceAll()
         {
             DateTime datecache = CrossSettings.Current.GetValueOrDefault("ChacheDate", DateTime.MaxValue);
@@ -156,17 +165,10 @@ namespace Fishphone
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://ribakiriba.ru");
+                    client.BaseAddress = new Uri("Uri");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     HttpResponseMessage response = await client.GetAsync("api/fish.php");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string fish = await response.Content.ReadAsStringAsync();
-                        JArray json = JArray.Parse(fish);
-                        manualList = JsonConvert.DeserializeObject<List<Manualcs>>(json.ToString());
-                        await BlobCache.UserAccount.InsertObject("ManualFishCache", manualList);
-                    }
                     HttpResponseMessage response1 = await client.GetAsync("api/lodki.php");
                     if (response1.IsSuccessStatusCode)
                     {
@@ -200,19 +202,12 @@ namespace Fishphone
 
         private async void Baner_Clicked(object sender, EventArgs e)
         {
-            try
-            {
-                
-            }
-            catch
-            {
-
-            }
-            
+           
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
+
             if (string.IsNullOrEmpty(e.NewTextValue))
             {
                 ListFish.ItemsSource = manualList;
@@ -223,5 +218,6 @@ namespace Fishphone
                 ListFish.ItemsSource = manualList.Where(x => x.nameitem.ToUpper().StartsWith(e.NewTextValue.ToUpper()));
             }
         }
+       
     }
 }

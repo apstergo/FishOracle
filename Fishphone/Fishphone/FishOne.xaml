@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Fishphone"
+             mc:Ignorable="d"
+             x:Class="Fishphone.FishOne">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid BackgroundColor="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="Picc" Aspect="AspectFit" Grid.Row="1"/>
+                <Label x:Name="lableTitli" Grid.Row="0" FontSize="20" TextColor="#282936" FontAttributes="Bold" VerticalOptions="Center" Margin="15,5,15,5"/>
+                <Label x:Name="lableType" Grid.Row="2"  FontSize="18" TextColor="#787981" Margin="15,5,15,5"/>
+                <Label x:Name="lableRod" Grid.Row="3" FontSize="18" TextColor="#282936" FontAttributes="Bold" VerticalOptions="Center" Margin="15,5,15,5"/>
+                <Label x:Name="lableFem" Grid.Row="4"  FontSize="18" TextColor="#787981" Margin="15,5,15,5"/>
+                <Label x:Name="lableArea" Grid.Row="5" FontSize="18" TextColor="#282936" FontAttributes="Bold" VerticalOptions="Center" Margin="15,5,15,5"/>
+                <Label x:Name="lableAreal" Grid.Row="6"  FontSize="18" TextColor="#787981" Margin="15,5,15,5"/>
+                <Label x:Name="lableLifestyle" Grid.Row="7" FontSize="18" TextColor="#282936" FontAttributes="Bold" VerticalOptions="Center" Margin="15,5,15,5"/>
+                <Label x:Name="lableTypeFeed" Grid.Row="8"  FontSize="18" TextColor="#787981" Margin="15,5,15,5"/>
+                <Label x:Name="lableFeed" Grid.Row="9" FontSize="18" TextColor="#282936" FontAttributes="Bold" VerticalOptions="Center" Margin="15,5,15,5"/>
+                <Label x:Name="lableReprod" Grid.Row="10"  FontSize="18" TextColor="#787981" Margin="15,5,15,5"/>
+                <Label x:Name="lableNaj" Grid.Row="11"  FontSize="18" TextColor="#282936" Margin="15,5,15,5"/>
+                <Label x:Name="lableOpis" Grid.Row="12"  FontSize="18" TextColor="#282936" Margin="15,5,15,5"/>
+
+                <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HeightRequest="50" VerticalOptions="EndAndExpand" Grid.Row="13">
+                    <BoxView BackgroundColor="#61616b" Grid.Row="0"/>
+                    <local:AdMobView AdUnitId="ca-app-pub-8506357682481775/1786613753" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="50" Grid.Row="0"/>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

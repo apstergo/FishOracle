@@ -25,7 +25,7 @@ namespace Fishphone
             using (HttpClient client = new HttpClient())
             {
                 string s;
-                client.BaseAddress = new Uri("http://ribakiriba.ru");
+                client.BaseAddress = new Uri("");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

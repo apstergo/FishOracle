@@ -1,9 +1,7 @@
 {
   "project_info": {
     "project_number": "283266012374",
-    "firebase_url": "https://ribak-i-riba.firebaseio.com",
-    "project_id": "ribak-i-riba",
-    "storage_bucket": "ribak-i-riba.appspot.com"
+    "firebase_url": "Uri",
   },
   "client": [
     {
@@ -21,7 +19,6 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDWKzPYD62QHMa3cjoaV8TVC1wo0FqVrbc"
         }
       ],
       "services": {

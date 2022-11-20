@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fishphone.ManualAll">
-    <Grid BackgroundColor="White">
+             xmlns:local="clr-namespace:Fishphone"
+             x:Class="Fishphone.ManualAll" NavigationPage.HasBackButton="True">
+    <Grid BackgroundColor="White" RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <SearchBar Grid.Row="0" Placeholder="Поиск" TextChanged="SearchBar_TextChanged"/>
-        <ListView Grid.Row="1" x:Name="ListFish" SeparatorVisibility="None" ItemTapped="ListFish_ItemTapped" BackgroundColor="White">
+        <SearchBar Grid.Row="0" Placeholder="Поиск" TextChanged="SearchBar_TextChanged" Margin="10,0,0,0"/>
+        <ListView Grid.Row="1" x:Name="ListFish" SeparatorVisibility="None" ItemTapped="ListFish_ItemTapped" BackgroundColor="White" Margin="10,5,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ImageCell
@@ -17,10 +18,14 @@
                         Text="{Binding nameitem}"
                         Detail="{Binding opis}"
                         TextColor="#454752"
+                        Height="450"
                         />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ImageButton x:Name="baner" Grid.Row="2" Aspect="AspectFill" Clicked="Baner_Clicked" Source="https://pbs.twimg.com/media/Cs95LjyXgAAf-YU.jpg"/>
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" HeightRequest="50" VerticalOptions="EndAndExpand" Grid.Row="2">
+            <BoxView BackgroundColor="#61616b" Grid.Row="0"/>
+            <local:AdMobView AdUnitId="ca-app-pub-8506357682481775/1786613753" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="50" Grid.Row="0"/>
+        </Grid>
     </Grid>
 </ContentPage>

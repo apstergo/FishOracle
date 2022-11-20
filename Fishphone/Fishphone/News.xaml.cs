@@ -23,7 +23,7 @@ namespace Fishphone
             RunAsyc();
             Disconnect.IsVisible = false;
             baner.Source = null;
-            baner.Source = new UriImageSource { CachingEnabled = true, Uri = new Uri("http://ribakiriba.ru/advertisingplace.png") };
+            baner.Source = new UriImageSource { CachingEnabled = true, Uri = new Uri("") };
             listview1.RefreshCommand = new Command(() => {
                 try
                 {
@@ -45,7 +45,7 @@ namespace Fishphone
                 using (HttpClient client = new HttpClient())
                 {
                     string s;
-                    client.BaseAddress = new Uri("http://ribakiriba.ru");
+                    client.BaseAddress = new Uri("");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

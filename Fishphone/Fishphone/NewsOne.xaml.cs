@@ -19,7 +19,7 @@ namespace Fishphone
             lableDate.Text = content.date;
             lableText.Text = content.textnews.Replace("<br />","");
             baner.Source = null;
-            baner.Source = new UriImageSource { CachingEnabled = true, Uri = new Uri("http://ribakiriba.ru/advertisingplace.png") };
+            baner.Source = new UriImageSource { CachingEnabled = true, Uri = new Uri("") };
             //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Transparent;
         }
         protected override bool OnBackButtonPressed()

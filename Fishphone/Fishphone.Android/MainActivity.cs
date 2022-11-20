@@ -10,10 +10,12 @@ using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
 using Android.Gms.Common;
+using Android.Gms.Ads;
+using Xamarin.Forms;
 
 namespace Fishphone.Droid
 {
-    [Activity(Label = "Fishphone", Icon = "@drawable/logo5", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "FishOracle", Icon = "@drawable/logo5", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         static readonly string TAG = "MainActivity";
@@ -28,14 +30,33 @@ namespace Fishphone.Droid
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            if (Device.Idiom == TargetIdiom.Phone)
+            {
+                this.RequestedOrientation = ScreenOrientation.Portrait;
+            }
+            if (Device.Idiom == TargetIdiom.TV)
+            {
+                this.RequestedOrientation = ScreenOrientation.Landscape;
+            }
+            if (Device.Idiom == TargetIdiom.Tablet)
+            {
+                this.RequestedOrientation = ScreenOrientation.Landscape;
+            }
 
-            Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#454753"));
 
-            IsPlayServicesAvailable();
-            CreateNotificationChannel();
+            if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Lollipop)
+            {
+                Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#454753"));
+                Window.SetNavigationBarColor(Android.Graphics.Color.ParseColor("#454753"));
+            };
+           
+
+            //IsPlayServicesAvailable();
+            //CreateNotificationChannel();
 
             LoadApplication(new App());
         }
+
         public bool IsPlayServicesAvailable()
         {
             int resultCode = Android.Gms.Common.GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);

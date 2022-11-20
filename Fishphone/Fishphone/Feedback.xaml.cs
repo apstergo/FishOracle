@@ -24,15 +24,14 @@ namespace Fishphone
         public Feedback()
         {
             InitializeComponent();
-            baner.Source = null;
-            baner.Source = new UriImageSource { CachingEnabled = false, Uri = new Uri("http://ribakiriba.ru/advertisingplace.png") };
+           
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://ribakiriba.ru");
+                client.BaseAddress = new Uri("Uri");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -80,7 +79,7 @@ namespace Fishphone
 
         private void Baner_Clicked(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("http://ribakiriba.ru"));
+            
         }
     }
 }
